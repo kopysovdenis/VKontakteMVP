@@ -9,21 +9,23 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 
 import java.util.zip.Inflater;
 
+import javax.inject.Inject;
+
+import www.performancelab.com.vkontaktetest.MyApplication;
 import www.performancelab.com.vkontaktetest.R;
 import www.performancelab.com.vkontaktetest.common.manager.MyFragmentManager;
 import www.performancelab.com.vkontaktetest.ui.fragment.BaseFragment;
 
 public abstract class BaseActivity extends MvpAppCompatActivity {
 
+    @Inject
     MyFragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        MyApplication.getsApplicationComponent().inject(this);
         setContentView(R.layout.activity_base);
-
-        mFragmentManager = new MyFragmentManager();
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

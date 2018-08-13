@@ -12,6 +12,7 @@ import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKError;
 
 import www.performancelab.com.vkontaktetest.CurrecnUser;
+import www.performancelab.com.vkontaktetest.MyApplication;
 import www.performancelab.com.vkontaktetest.R;
 import www.performancelab.com.vkontaktetest.consts.ApiConstants;
 import www.performancelab.com.vkontaktetest.mvp.presenter.MainPresenter;
@@ -26,6 +27,7 @@ public class MainActivity extends BaseActivity implements MineView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApplication.getsApplicationComponent().inject(this);
 
         mPresent.checkAuth();
         }
