@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">VKontakteTest</string>
     <string name="title_activity_main">Sign in</string>
-    <string name="com_vk_sdk_AppId">AppId</string>
+    <integer name="com_vk_sdk_AppId">6659631</integer>
+
+    <string name="screen_name_news">News</string>
 </resources>

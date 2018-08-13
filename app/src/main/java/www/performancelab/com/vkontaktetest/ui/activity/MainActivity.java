@@ -16,6 +16,7 @@ import www.performancelab.com.vkontaktetest.R;
 import www.performancelab.com.vkontaktetest.consts.ApiConstants;
 import www.performancelab.com.vkontaktetest.mvp.presenter.MainPresenter;
 import www.performancelab.com.vkontaktetest.mvp.view.MineView;
+import www.performancelab.com.vkontaktetest.ui.fragment.NewsFeedFragment;
 
 public class MainActivity extends BaseActivity implements MineView {
 
@@ -42,6 +43,7 @@ public class MainActivity extends BaseActivity implements MineView {
     @Override
     public void signedIn() {
         Toast.makeText(this,"Current user id: " + CurrecnUser.getId(), Toast.LENGTH_LONG).show();
+        setContent(new NewsFeedFragment());
     }
 
     @Override
