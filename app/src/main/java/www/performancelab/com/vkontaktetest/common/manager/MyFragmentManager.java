@@ -23,14 +23,13 @@ public class MyFragmentManager {
             commitAddTransaction(activity, fragment, transaction,false);
         }
     }
-    public void  addFragment(BaseActivity activity, BaseFragment fragment, @IdRes int containerId){
+    public void addFragment(BaseActivity activity, BaseFragment fragment, @IdRes int containerId){
         if (activity != null && !activity.isFinishing() && !isAlreadyContains(fragment)) {
             FragmentTransaction transaction = createAddTransaction(activity, fragment, true);
             transaction.add(containerId, fragment);
             commitAddTransaction(activity, fragment, transaction, true);
             }
         }
-
 
     private FragmentTransaction createAddTransaction(BaseActivity activity, BaseFragment fragment, boolean addToBackStack){
         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
