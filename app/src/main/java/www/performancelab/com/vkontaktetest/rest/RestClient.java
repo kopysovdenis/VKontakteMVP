@@ -1,0 +1,23 @@
+package www.performancelab.com.vkontaktetest.rest;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+
+public class RestClient {
+    private static final String VK_BASE_URL = "https://api.vk.com/method/";
+
+    private Retrofit mRetrofit;
+
+    public RestClient(){
+        mRetrofit = new Retrofit.Builder()
+                .baseUrl(VK_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+//
+
+    }
+    public <S> S createService(Class<S> serviceClass){
+        return mRetrofit.create(serviceClass);
+    }
+}
