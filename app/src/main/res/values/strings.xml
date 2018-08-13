@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">VKontakteTest</string>
+    <string name="title_activity_main">Sign in</string>
+    <string name="com_vk_sdk_AppId">AppId</string>
+</resources>
