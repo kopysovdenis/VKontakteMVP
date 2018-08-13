@@ -1,6 +1,4 @@
-package www.performancelab.com.vkontaktetest.Const;
-
-import com.vk.sdk.VKSdk;
+package www.performancelab.com.vkontaktetest.consts;
 
 public class ApiConstants {
     public static final String[] DEFAULT_LOGIN_SCOPE = {};

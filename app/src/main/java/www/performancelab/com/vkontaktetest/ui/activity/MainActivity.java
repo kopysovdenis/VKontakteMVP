@@ -1,4 +1,4 @@
-package www.performancelab.com.vkontaktetest;
+package www.performancelab.com.vkontaktetest.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,11 +11,13 @@ import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKError;
 
-import www.performancelab.com.vkontaktetest.Const.ApiConstants;
+import www.performancelab.com.vkontaktetest.CurrecnUser;
+import www.performancelab.com.vkontaktetest.R;
+import www.performancelab.com.vkontaktetest.consts.ApiConstants;
 import www.performancelab.com.vkontaktetest.mvp.presenter.MainPresenter;
 import www.performancelab.com.vkontaktetest.mvp.view.MineView;
 
-public class MainActivity extends MvpAppCompatActivity implements MineView {
+public class MainActivity extends BaseActivity implements MineView {
 
     @InjectPresenter
     MainPresenter mPresent;
