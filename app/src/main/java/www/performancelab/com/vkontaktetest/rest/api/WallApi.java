@@ -12,7 +12,7 @@ import www.performancelab.com.vkontaktetest.rest.model.response.Full;
 public interface WallApi {
     @GET(ApiMethods.WALL_GET)
     Call<Full<BaseItemResponse>> get(@Query("owner_id") String ownerId,
-                                     @Query("access_tocen") String accessToken,
+                                     @Query("access_token") String accessToken,
                                      @Query("extended") Integer extended,
                                      @Query("v") String version);
 }

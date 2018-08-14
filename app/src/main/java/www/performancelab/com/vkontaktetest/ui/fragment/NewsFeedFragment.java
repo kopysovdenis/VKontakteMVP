@@ -47,7 +47,7 @@ public class NewsFeedFragment extends BaseFragment {
         mWallApi.get("-86529522", CurrecnUser.getAccessTocen(), 1 , "5.80").enqueue(new Callback<Full<BaseItemResponse>>() {
             @Override
             public void onResponse(Call<Full<BaseItemResponse>> call, Response<Full<BaseItemResponse>> response) {
-                Toast.makeText(getActivity(), "count: " + response.body().response.getCount(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Count: " + response.body().response.getCount(), Toast.LENGTH_LONG).show();
             }
 
             @Override
