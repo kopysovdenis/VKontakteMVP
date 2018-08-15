@@ -4,4 +4,8 @@
     <integer name="com_vk_sdk_AppId">6659631</integer>
 
     <string name="screen_name_news">News</string>
+    
+    <string name="font_hear">&#xE87D;</string>
+    <string name="font_commend">&#xE0B9;</string>
+    <string name="font_repost">&#xE050;</string>
 </resources>
