@@ -19,8 +19,10 @@ import www.performancelab.com.vkontaktetest.CurrecnUser;
 import www.performancelab.com.vkontaktetest.MyApplication;
 import www.performancelab.com.vkontaktetest.R;
 import www.performancelab.com.vkontaktetest.rest.api.WallApi;
+import www.performancelab.com.vkontaktetest.rest.model.request.WallGetRequestModel;
 import www.performancelab.com.vkontaktetest.rest.model.response.BaseItemResponse;
 import www.performancelab.com.vkontaktetest.rest.model.response.Full;
+import www.performancelab.com.vkontaktetest.rest.model.response.WallGetResponse;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,14 +46,14 @@ public class NewsFeedFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mWallApi.get("-86529522", CurrecnUser.getAccessTocen(), 1 , "5.80").enqueue(new Callback<Full<BaseItemResponse>>() {
+        mWallApi.get(new WallGetRequestModel(-86529522).toMap()).enqueue(new Callback<WallGetResponse>() {
             @Override
-            public void onResponse(Call<Full<BaseItemResponse>> call, Response<Full<BaseItemResponse>> response) {
-                Toast.makeText(getActivity(), "Count: " + response.body().response.getCount(), Toast.LENGTH_LONG).show();
+            public void onResponse(Call<WallGetResponse> call, Response<WallGetResponse> response) {
+                Toast.makeText(getActivity(), "Like: " + response.body().response.getItems().get(0).getLikes().getCount(), Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onFailure(Call<Full<BaseItemResponse>> call, Throwable t) {
+            public void onFailure(Call<WallGetResponse> call, Throwable t) {
                 t.printStackTrace();
             }
         });
