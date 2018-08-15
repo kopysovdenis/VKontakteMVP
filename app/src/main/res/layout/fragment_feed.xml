@@ -6,4 +6,12 @@
     android:background="@color/colorDefoultWhite"
     android:fitsSystemWindows="true"
     tools:context=".ui.fragment.NewsFeedFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_List"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>
