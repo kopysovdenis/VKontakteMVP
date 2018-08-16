@@ -6,15 +6,28 @@ import www.performancelab.com.vkontaktetest.model.WallItem;
 import www.performancelab.com.vkontaktetest.ui.holder.BaseViewHolder;
 import www.performancelab.com.vkontaktetest.ui.holder.NewsItebBodyHolder;
 
-public class NewsFeedItemBodyViewModel extends BaseViewModel {
+public class NewsItemBodyViewModel extends BaseViewModel {
 
     private int mId;
 
     private String mText;
 
-    public NewsFeedItemBodyViewModel(WallItem wallItem){
+    private String mAttachmentString;
+
+    private boolean mIsRepost;
+
+    public NewsItemBodyViewModel(WallItem wallItem){
         this.mId = wallItem.getId();
-        this.mText = wallItem.getText();
+        this.mIsRepost = wallItem.haveSharedRepost();
+
+        if (mIsRepost){
+            this.mText = wallItem.getSharedRepost().getText();
+            this.mAttachmentString = wallItem.getSharedRepost().getAttachmentsString();
+        } else {
+            this.mText = wallItem.getText();
+            this.mAttachmentString = wallItem.getAttachmentsString();
+        }
+
     }
 
     @Override
@@ -33,5 +46,9 @@ public class NewsFeedItemBodyViewModel extends BaseViewModel {
 
     public String getText() {
         return mText;
+    }
+
+    public String getAttachmentString() {
+        return mAttachmentString;
     }
 }

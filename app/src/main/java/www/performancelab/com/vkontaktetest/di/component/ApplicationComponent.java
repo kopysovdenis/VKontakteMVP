@@ -9,6 +9,8 @@ import www.performancelab.com.vkontaktetest.di.module.RestModule;
 import www.performancelab.com.vkontaktetest.ui.activity.BaseActivity;
 import www.performancelab.com.vkontaktetest.ui.activity.MainActivity;
 import www.performancelab.com.vkontaktetest.ui.fragment.NewsFeedFragment;
+import www.performancelab.com.vkontaktetest.ui.holder.NewsItebBodyHolder;
+import www.performancelab.com.vkontaktetest.ui.holder.NewsItemFooterHolder;
 
 @Singleton
 @Component(modules = {ApplicationModule.class, ManagerModule.class, RestModule.class})
@@ -20,4 +22,6 @@ public interface ApplicationComponent {
 
     //fragment
     void inject(NewsFeedFragment fragment);
+    void inject(NewsItebBodyHolder holder);
+    void inject(NewsItemFooterHolder holder);
 }
