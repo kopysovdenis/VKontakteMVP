@@ -34,13 +34,12 @@ import www.performancelab.com.vkontaktetest.rest.model.response.WallGetResponse;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFeedFragment extends BaseFragment {
+public class NewsFeedFragment extends BaseFeedFragment {
 
     @Inject
     WallApi mWallApi;
 
-    RecyclerView mRecyclerView;
-    BaseAdapter mBaseAdapter;
+
 
     public NewsFeedFragment() {
         // Required empty public constructor
@@ -80,32 +79,12 @@ public class NewsFeedFragment extends BaseFragment {
         });
     }
 
-    @Override
-    protected int getMainContentLayout() {
-        return R.layout.fragment_feed;
-    }
+
 
     @Override
     public int onCreateToolBarTitle() {
         return R.string.screen_name_news;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setUpRecyclerView(view);
-        setUpAdapter(mRecyclerView);
-    }
-
-    private void setUpRecyclerView(View rootView){
-        mRecyclerView = rootView.findViewById(R.id.rv_List);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
-
-    private void setUpAdapter(RecyclerView recyclerView){
-        mBaseAdapter = new BaseAdapter();
-
-        recyclerView.setAdapter(mBaseAdapter);
-    }
 
 }
