@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 
+import www.performancelab.com.vkontaktetest.ui.activity.BaseActivity;
+
 public abstract class BaseFragment extends MvpAppCompatFragment {
 
     @LayoutRes
@@ -29,4 +31,8 @@ public abstract class BaseFragment extends MvpAppCompatFragment {
 
     @StringRes
     public abstract int onCreateToolBarTitle();
+
+    public BaseActivity getBaseActivity(){
+        return (BaseActivity) getActivity();
+    }
 }

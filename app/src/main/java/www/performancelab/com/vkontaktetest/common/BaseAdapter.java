@@ -64,7 +64,7 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewMod
         notifyDataSetChanged();
     }
 
-    public void setItem(List<BaseViewModel> items){
+    public void setItems(List<BaseViewModel> items){
         clearList();
         addItems(items);
     }

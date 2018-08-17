@@ -3,27 +3,42 @@ package www.performancelab.com.vkontaktetest.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import java.util.List;
 
 import www.performancelab.com.vkontaktetest.R;
 import www.performancelab.com.vkontaktetest.common.BaseAdapter;
+import www.performancelab.com.vkontaktetest.model.view.BaseViewModel;
+import www.performancelab.com.vkontaktetest.mvp.presenter.BaseFeedPresenter;
+import www.performancelab.com.vkontaktetest.mvp.view.BaseFeedView;
 
-public class BaseFeedFragment extends BaseFragment {
+public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedView{
 
     RecyclerView mRecyclerView;
-    BaseAdapter mBaseAdapter;
+    BaseAdapter mAdapter;
+
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
+    protected ProgressBar mProgressBar;
+
+    protected BaseFeedPresenter mBaseFeedPresenter;
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setUpSwipeToRefreshLayout(view);
         setUpRecyclerView(view);
         setUpAdapter(mRecyclerView);
+
+        mBaseFeedPresenter = onCreateFeedPresenter();
+        mBaseFeedPresenter.loadStart();
     }
-
-
-
 
     private void setUpRecyclerView(View rootView){
         mRecyclerView = rootView.findViewById(R.id.rv_List);
@@ -31,9 +46,9 @@ public class BaseFeedFragment extends BaseFragment {
     }
 
     private void setUpAdapter(RecyclerView recyclerView){
-        mBaseAdapter = new BaseAdapter();
+        mAdapter = new BaseAdapter();
 
-        recyclerView.setAdapter(mBaseAdapter);
+        recyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -45,4 +60,51 @@ public class BaseFeedFragment extends BaseFragment {
     public int onCreateToolBarTitle() {
         return 0;
     }
+
+    public void setUpSwipeToRefreshLayout(View rootView){
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh);
+        mSwipeRefreshLayout.setOnRefreshListener(() -> onCreateFeedPresenter().loadRefresh());
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        mProgressBar = getBaseActivity().getProgresBar();
+    }
+
+    protected abstract BaseFeedPresenter onCreateFeedPresenter();
+
+    @Override
+    public void showRefrasheng() {
+
+    }
+
+    @Override
+    public void hideRefrasheng() {
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showListProgress() {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideListProgress() {
+        mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showError(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setItems(List<BaseViewModel> items) {
+        mAdapter.setItems(items);
+    }
+
+    @Override
+    public void addItems(List<BaseViewModel> items) {
+        mAdapter.addItems(items);
+    }
+
 }
+
+
