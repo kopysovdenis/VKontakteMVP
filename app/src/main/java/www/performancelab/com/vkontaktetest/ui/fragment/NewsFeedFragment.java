@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
 import javax.inject.Inject;
 
 import www.performancelab.com.vkontaktetest.MyApplication;
@@ -21,7 +23,7 @@ public class NewsFeedFragment extends BaseFeedFragment{
     WallApi mWallApi;
 
 
-    @Inject
+    @InjectPresenter
     BaseFeedPresenter mPresenter;
 
 
