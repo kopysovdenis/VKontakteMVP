@@ -30,8 +30,8 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
                 .toList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(dosposable -> {
-                    onLoadStart(progressType);
+                .doOnSubscribe(disposable -> {
+                    onLoadingStart(progressType);
                 })
                 .doFinally(() -> {
                     onLoadingFinish(progressType);
@@ -82,7 +82,7 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
         loadDate(ProgressType.Refreshing, 0, START_PAGE_SIZE);
     }
 
-    public void onLoadStart(ProgressType progressType){
+    public void onLoadingStart(ProgressType progressType){
         showProgress(progressType);
     }
 
