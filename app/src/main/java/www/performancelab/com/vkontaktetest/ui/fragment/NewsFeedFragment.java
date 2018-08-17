@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import www.performancelab.com.vkontaktetest.MyApplication;
 import www.performancelab.com.vkontaktetest.mvp.presenter.BaseFeedPresenter;
+import www.performancelab.com.vkontaktetest.mvp.presenter.NewsFeedPresenter;
 import www.performancelab.com.vkontaktetest.rest.api.WallApi;
 
 /**
@@ -22,11 +23,8 @@ public class NewsFeedFragment extends BaseFeedFragment{
     @Inject
     WallApi mWallApi;
 
-
     @InjectPresenter
-    BaseFeedPresenter mPresenter;
-
-
+    NewsFeedPresenter mPresenter;
 
     public NewsFeedFragment() {
         // Required empty public constructor
