@@ -50,7 +50,6 @@ public class MainActivity extends BaseActivity implements MineView {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode != RESULT_CANCELED){
             if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
                 @Override
                 public void onResult(VKAccessToken res) {
@@ -62,7 +61,6 @@ public class MainActivity extends BaseActivity implements MineView {
                 }
             })) {
             }
-        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -46,6 +46,7 @@ public class NewsFeedFragment extends BaseFeedFragment{
     public int onCreateToolBarTitle() {
         return R.string.screen_name_news;
     }
+
     @Override
     protected BaseFeedPresenter onCreateFeedPresenter() {
         return mPresenter;
