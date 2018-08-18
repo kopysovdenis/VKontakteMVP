@@ -3,17 +3,19 @@ package www.performancelab.com.vkontaktetest.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.util.ArrayList;
-import java.util.List;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 import www.performancelab.com.vkontaktetest.model.attachment.ApiAttachment;
 
-public class WallItem {
+public class WallItem extends RealmObject{
 
     private String attachmentsString;
     private String senderName;
     private String senderPhoto;
 
+    @PrimaryKey
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -41,11 +43,11 @@ public class WallItem {
 
     @SerializedName("copy_history")
     @Expose
-    private List<WallItem> copyHistory = new ArrayList<>();
+    private RealmList<WallItem> copyHistory = new RealmList<>();
 
     @SerializedName("attachments")
     @Expose
-    private List<ApiAttachment> attachments = new ArrayList<>();
+    private RealmList<ApiAttachment> attachments = new RealmList<>();
 
 
     @SerializedName("post_source")
@@ -70,6 +72,14 @@ public class WallItem {
 
     public void setAttachmentsString(String attachmentsString) {
         this.attachmentsString = attachmentsString;
+    }
+
+    public RealmList<WallItem> getCopyHistory() {
+        return copyHistory;
+    }
+
+    public void setCopyHistory(RealmList<WallItem> copyHistory) {
+        this.copyHistory = copyHistory;
     }
 
     public Integer getId() {
@@ -108,11 +118,11 @@ public class WallItem {
         return markedAsAds;
     }
 
-    public List<ApiAttachment> getAttachments() {
+    public RealmList<ApiAttachment> getAttachments() {
         return attachments;
     }
 
-    public void setAttachments(List<ApiAttachment> attachments) {
+    public void setAttachments(RealmList<ApiAttachment> attachments) {
         this.attachments = attachments;
     }
 

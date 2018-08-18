@@ -6,9 +6,14 @@ import com.arellomobile.mvp.MvpPresenter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import io.realm.Realm;
+import io.realm.RealmObject;
+import www.performancelab.com.vkontaktetest.common.manager.NetworkManager;
 import www.performancelab.com.vkontaktetest.model.view.BaseViewModel;
 import www.performancelab.com.vkontaktetest.mvp.view.BaseFeedView;
 
@@ -19,6 +24,9 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
 
     private boolean mIsInLoading;
 
+    @Inject
+    NetworkManager mNetworkManager;
+
     @SuppressLint("CheckResult")
     public void loadDate(ProgressType progressType, int offset, int count){
         if (mIsInLoading){
@@ -26,7 +34,18 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
         }
         mIsInLoading = true;
 
-        onCreateLoadDateObservable(count, offset)
+        mNetworkManager.getNetworkObservable()
+                .flatMap(aBoolean -> {
+                    if (!aBoolean && offset > 0){
+                        return Observable.empty();
+                    }
+                    return aBoolean
+                            ? onCreateLoadDataObservable(count, offset)
+                            : onCreateRestoreDataObservable();
+                })
+
+
+
                 .toList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -44,7 +63,7 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
                 });
     }
 
-    public abstract Observable<BaseViewModel> onCreateLoadDateObservable(int count, int offset);
+    public abstract Observable<BaseViewModel> onCreateLoadDataObservable(int count, int offset);
 
     public enum ProgressType{
         Refreshing, ListProgress, Paging
@@ -103,4 +122,11 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
             getViewState().setItems(item);
         }
     }
+
+    public void saveToDb(RealmObject item){
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(item));
+    }
+
+    public abstract Observable<BaseViewModel> onCreateRestoreDataObservable();
 }

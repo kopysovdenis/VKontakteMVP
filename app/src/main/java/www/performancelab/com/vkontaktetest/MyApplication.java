@@ -4,7 +4,8 @@ import android.app.Application;
 
 import com.vk.sdk.VKSdk;
 
-import dagger.internal.DaggerCollections;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import www.performancelab.com.vkontaktetest.di.component.ApplicationComponent;
 import www.performancelab.com.vkontaktetest.di.component.DaggerApplicationComponent;
 import www.performancelab.com.vkontaktetest.di.module.ApplicationModule;
@@ -19,6 +20,13 @@ public class MyApplication extends Application {
 
         initComponent();
         VKSdk.initialize(this);
+
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration
+                .Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
     }
 
     private void initComponent(){

@@ -3,6 +3,7 @@ package www.performancelab.com.vkontaktetest.di.component;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import www.performancelab.com.vkontaktetest.common.manager.NetworkManager;
 import www.performancelab.com.vkontaktetest.di.module.ApplicationModule;
 import www.performancelab.com.vkontaktetest.di.module.ManagerModule;
 import www.performancelab.com.vkontaktetest.di.module.RestModule;
@@ -30,4 +31,7 @@ public interface ApplicationComponent {
 
     //presenter
     void inject(NewsFeedPresenter presenter);
+
+    //manager
+    void inject(NetworkManager manager);
 }
