@@ -85,4 +85,9 @@ public class NewsItemFooterViewModel extends BaseViewModel {
     public void setReposts(RepostCounterVievModel mReposts) {
         this.mReposts = mReposts;
     }
+
+    @Override
+    public boolean isItemDecorator() {
+        return true;
+    }
 }

@@ -72,4 +72,15 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewMod
     public void clearList(){
         list.clear();
     }
+
+    public int getRealItemCount(){
+        int count = 0;
+
+        for (int i = 0 ; i < getItemCount(); i++){
+            if (!getItem(i).isItemDecorator()){
+                count += 1;
+            }
+        }
+        return count;
+    }
 }
