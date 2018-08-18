@@ -28,11 +28,10 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
         MyApplication.getsApplicationComponent().inject(this);
         setContentView(R.layout.activity_base);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         mProgresBar = findViewById(R.id.progres);
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         FrameLayout parent = findViewById(R.id.main_wrapper);
         getLayoutInflater().inflate(getMainContentLayout(), parent);
     }

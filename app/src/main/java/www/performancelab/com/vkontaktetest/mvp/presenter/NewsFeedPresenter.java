@@ -14,6 +14,7 @@ import www.performancelab.com.vkontaktetest.MyApplication;
 import www.performancelab.com.vkontaktetest.common.utils.VkListHelper;
 import www.performancelab.com.vkontaktetest.model.view.BaseViewModel;
 import www.performancelab.com.vkontaktetest.model.view.NewsItemBodyViewModel;
+import www.performancelab.com.vkontaktetest.model.view.NewsItemFooterViewModel;
 import www.performancelab.com.vkontaktetest.model.view.NewsItemHeaderViewModel;
 import www.performancelab.com.vkontaktetest.mvp.view.BaseFeedView;
 import www.performancelab.com.vkontaktetest.rest.api.WallApi;
@@ -39,7 +40,7 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView>{
 
                     baseItem.add(new NewsItemHeaderViewModel(wallItem));
                     baseItem.add(new NewsItemBodyViewModel(wallItem));
-                    baseItem.add(new NewsItemHeaderViewModel(wallItem));
+                    baseItem.add(new NewsItemFooterViewModel(wallItem));
 
                     return Observable.fromIterable(baseItem);
                 });

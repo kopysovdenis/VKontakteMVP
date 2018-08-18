@@ -28,27 +28,16 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
 
     protected BaseFeedPresenter mBaseFeedPresenter;
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setUpSwipeToRefreshLayout(view);
+
         setUpRecyclerView(view);
         setUpAdapter(mRecyclerView);
+        setUpSwipeToRefreshLayout(view);
 
         mBaseFeedPresenter = onCreateFeedPresenter();
         mBaseFeedPresenter.loadStart();
-    }
-
-    private void setUpRecyclerView(View rootView){
-        mRecyclerView = rootView.findViewById(R.id.rv_List);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
-
-    private void setUpAdapter(RecyclerView recyclerView){
-        mAdapter = new BaseAdapter();
-
-        recyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -56,23 +45,32 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
         return R.layout.fragment_feed;
     }
 
-    @Override
-    public int onCreateToolBarTitle() {
-        return 0;
+    private void setUpRecyclerView(View rootView){
+        mRecyclerView = rootView.findViewById(R.id.rv_List);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private void setUpAdapter(RecyclerView rv){
+        mAdapter = new BaseAdapter();
+        rv.setAdapter(mAdapter);
     }
 
     public void setUpSwipeToRefreshLayout(View rootView){
         mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh);
         mSwipeRefreshLayout.setOnRefreshListener(() -> onCreateFeedPresenter().loadRefresh());
-        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mProgressBar = getBaseActivity().getProgresBar();
+    }
+
+    @Override
+    public int onCreateToolBarTitle() {
+        return 0;
     }
 
     protected abstract BaseFeedPresenter onCreateFeedPresenter();
 
     @Override
     public void showRefrasheng() {
-
     }
 
     @Override
@@ -104,7 +102,6 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
     public void addItems(List<BaseViewModel> items) {
         mAdapter.addItems(items);
     }
-
 }
 
 

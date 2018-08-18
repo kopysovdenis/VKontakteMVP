@@ -50,16 +50,18 @@ public class MainActivity extends BaseActivity implements MineView {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
-            @Override
-            public void onResult(VKAccessToken res) {
-                mPresent.checkAuth();
-            }
+        if(resultCode != RESULT_CANCELED){
+            if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
+                @Override
+                public void onResult(VKAccessToken res) {
+                    mPresent.checkAuth();
+                }
 
-            @Override
-            public void onError(VKError error) {
+                @Override
+                public void onError(VKError error) {
+                }
+            })) {
             }
-        })) {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

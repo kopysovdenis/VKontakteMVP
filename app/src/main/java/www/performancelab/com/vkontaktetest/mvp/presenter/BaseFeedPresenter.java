@@ -39,7 +39,8 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
                 .subscribe(repositories -> {
                     onLoadingSuccess(progressType, repositories);
                 }, error -> {
-                    onLoadingFauled(error);
+                    error.printStackTrace();
+                    onLoadingFailed(error);
                 });
     }
 
@@ -91,7 +92,7 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
         hideProgress(progressType);
     }
 
-    public void onLoadingFauled(Throwable throwable){
+    public void onLoadingFailed(Throwable throwable){
         getViewState().showError(throwable.getMessage());
     }
 
