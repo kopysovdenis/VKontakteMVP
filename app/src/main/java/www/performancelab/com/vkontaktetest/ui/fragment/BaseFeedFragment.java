@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
@@ -13,6 +12,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import www.performancelab.com.vkontaktetest.R;
 import www.performancelab.com.vkontaktetest.common.BaseAdapter;
 import www.performancelab.com.vkontaktetest.common.manager.MyLinearLayoutManager;
@@ -22,9 +23,11 @@ import www.performancelab.com.vkontaktetest.mvp.view.BaseFeedView;
 
 public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedView{
 
+    @BindView(R.id.rv_list)
     RecyclerView mRecyclerView;
     BaseAdapter mAdapter;
 
+    @BindView(R.id.swipe_refresh)
     protected SwipeRefreshLayout mSwipeRefreshLayout;
     protected ProgressBar mProgressBar;
 
@@ -33,6 +36,8 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ButterKnife.bind(this, view);
 
         setUpRecyclerView(view);
         setUpAdapter(mRecyclerView);
@@ -48,7 +53,6 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
     }
 
     private void setUpRecyclerView(View rootView){
-        mRecyclerView = rootView.findViewById(R.id.rv_List);
 
         MyLinearLayoutManager mLinearLayoutManager = new MyLinearLayoutManager(getActivity());
 
@@ -72,7 +76,6 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
     }
 
     public void setUpSwipeToRefreshLayout(View rootView){
-        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh);
         mSwipeRefreshLayout.setOnRefreshListener(() -> onCreateFeedPresenter().loadRefresh());
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mProgressBar = getBaseActivity().getProgresBar();

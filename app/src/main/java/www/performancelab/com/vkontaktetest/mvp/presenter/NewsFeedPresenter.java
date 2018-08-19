@@ -60,8 +60,8 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView>{
             Sort[] sortOrder = {Sort.DESCENDING};
             Realm realm = Realm.getDefaultInstance();
             RealmResults<WallItem> realmResults = realm.where(WallItem.class)
-                    .findAll()
-                    .sort(sortFields, sortOrder);
+                    .sort(sortFields, sortOrder)
+                    .findAll();
             return realm.copyFromRealm(realmResults);
         };
     }

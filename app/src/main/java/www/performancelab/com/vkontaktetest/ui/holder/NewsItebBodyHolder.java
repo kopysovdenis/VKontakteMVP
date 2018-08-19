@@ -6,25 +6,26 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import www.performancelab.com.vkontaktetest.MyApplication;
 import www.performancelab.com.vkontaktetest.R;
 import www.performancelab.com.vkontaktetest.model.view.NewsItemBodyViewModel;
 
 public class NewsItebBodyHolder extends BaseViewHolder<NewsItemBodyViewModel> {
 
-    private TextView mText;
-
-    private TextView mAttacments;
+    @BindView(R.id.tv_text)
+    public TextView mText;
+    @BindView(R.id.tv_attachments)
+    public TextView mAttacments;
 
     @Inject
     protected Typeface mFontGoogle;
 
     public NewsItebBodyHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this, itemView);
         MyApplication.getsApplicationComponent().inject(this);
-
-        mText = itemView.findViewById(R.id.tv_text);
-        mAttacments = itemView.findViewById(R.id.tv_attachments);
 
         if (mAttacments != null){
             mAttacments.setTypeface(mFontGoogle);
