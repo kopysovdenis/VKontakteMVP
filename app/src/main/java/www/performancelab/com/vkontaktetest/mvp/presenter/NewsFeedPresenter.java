@@ -82,6 +82,7 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView>{
             RealmResults<WallItem> realmResults = realm.where(WallItem.class)
                     .sort(sortFields, sortOrder)
                     .findAll();
+
             return realm.copyFromRealm(realmResults);
         };
     }

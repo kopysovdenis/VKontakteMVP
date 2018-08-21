@@ -1,7 +1,14 @@
 package www.performancelab.com.vkontaktetest.model.view;
 
+import android.content.Context;
 import android.view.View;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import www.performancelab.com.vkontaktetest.model.Member;
 import www.performancelab.com.vkontaktetest.ui.holder.BaseViewHolder;
 import www.performancelab.com.vkontaktetest.ui.holder.MemberItemHolder;
