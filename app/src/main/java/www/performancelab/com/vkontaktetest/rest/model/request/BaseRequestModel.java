@@ -6,7 +6,7 @@ import com.vk.sdk.api.VKApiConst;
 import java.util.HashMap;
 import java.util.Map;
 
-import www.performancelab.com.vkontaktetest.CurrecnUser;
+import www.performancelab.com.vkontaktetest.CurrentUser;
 import www.performancelab.com.vkontaktetest.consts.ApiConstants;
 
 public abstract class BaseRequestModel {
@@ -15,7 +15,7 @@ public abstract class BaseRequestModel {
     Double version = ApiConstants.DEFAULT_VERSION;
 
     @SerializedName(VKApiConst.ACCESS_TOKEN)
-    String accessToken = CurrecnUser.getAccessTocen();
+    String accessToken = CurrentUser.getAccessTocen();
 
     public Double getVersion() {
         return version;

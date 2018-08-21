@@ -53,4 +53,10 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    implementation('com.mikepenz:materialdrawer:5.9.5@aar') {
+        transitive = true
+    }
+
+    implementation'com.mikepenz:google-material-typeface:2.2.0.2.original@aar'
 }

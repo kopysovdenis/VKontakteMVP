@@ -3,7 +3,7 @@ package www.performancelab.com.vkontaktetest;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKSdk;
 
-public class CurrecnUser {
+public class CurrentUser {
 
     public static String getAccessTocen(){
         if (VKAccessToken.currentToken() == null){
