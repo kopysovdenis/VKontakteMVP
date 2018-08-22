@@ -43,9 +43,6 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
                             ? onCreateLoadDataObservable(count, offset)
                             : onCreateRestoreDataObservable();
                 })
-
-
-
                 .toList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

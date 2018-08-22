@@ -33,12 +33,10 @@ public class MembersPresenter extends BaseFeedPresenter<BaseFeedView> {
     @Override
     public Observable<BaseViewModel> onCreateLoadDataObservable(int count, int offset) {
         return mGroupApi.getMembers(new GroupsGetMembersRequestModel(
-                ApiConstants.MY_GROUP_ID, count, offset).toMap())
-                .flatMap(baseItemResponseFull -> {
-                    return Observable.fromIterable(baseItemResponseFull.response.getItems());
-                })
-                .doOnNext(member -> saveToDb(member))
-                .map(member -> new MemberViewModel(member));
+                ApiConstants.MY_GROUP_ID_MEMPERS, count, offset).toMap())
+                .flatMap(baseItemResponseFull -> Observable.fromIterable(baseItemResponseFull.response.getItems()))
+                .doOnNext(this::saveToDb)
+                .map(MemberViewModel::new);
     }
 
     @Override

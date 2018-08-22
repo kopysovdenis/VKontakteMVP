@@ -74,6 +74,7 @@ public class MainPresenter extends MvpPresenter<MineView> {
             Profile realmResults = realm.where(Profile.class)
                     .equalTo("id", Integer.parseInt(CurrentUser.getId()))
                     .findFirst();
+            assert realmResults != null;
             return realm.copyFromRealm(realmResults);
         };
     }
@@ -93,9 +94,7 @@ public class MainPresenter extends MvpPresenter<MineView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(profile -> {
                     getViewState().showCurrentUser(profile);
-                },error -> {
-                    error.printStackTrace();
-                });
+                }, Throwable::printStackTrace);
     }
 
     public void drawerItemClick(int id){
