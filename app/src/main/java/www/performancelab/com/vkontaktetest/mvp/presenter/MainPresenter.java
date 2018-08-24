@@ -24,6 +24,7 @@ import www.performancelab.com.vkontaktetest.rest.api.UsersApi;
 import www.performancelab.com.vkontaktetest.rest.model.request.UsersGetRequestModel;
 import www.performancelab.com.vkontaktetest.ui.fragment.BaseFragment;
 import www.performancelab.com.vkontaktetest.ui.fragment.BoardFragment;
+import www.performancelab.com.vkontaktetest.ui.fragment.InfoFragment;
 import www.performancelab.com.vkontaktetest.ui.fragment.MembersFragment;
 import www.performancelab.com.vkontaktetest.ui.fragment.MyPostsFragment;
 import www.performancelab.com.vkontaktetest.ui.fragment.NewsFeedFragment;
@@ -115,6 +116,9 @@ public class MainPresenter extends MvpPresenter<MineView> {
 
             case 5:
                 fragment = new BoardFragment();
+                break;
+            case 6:
+                fragment = new InfoFragment();
                 break;
         }
 

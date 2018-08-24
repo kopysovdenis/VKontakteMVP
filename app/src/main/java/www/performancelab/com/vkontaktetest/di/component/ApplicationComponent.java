@@ -8,6 +8,7 @@ import www.performancelab.com.vkontaktetest.di.module.ApplicationModule;
 import www.performancelab.com.vkontaktetest.di.module.ManagerModule;
 import www.performancelab.com.vkontaktetest.di.module.RestModule;
 import www.performancelab.com.vkontaktetest.mvp.presenter.BoardPresenter;
+import www.performancelab.com.vkontaktetest.mvp.presenter.InfoPresenter;
 import www.performancelab.com.vkontaktetest.mvp.presenter.MainPresenter;
 import www.performancelab.com.vkontaktetest.mvp.presenter.MembersPresenter;
 import www.performancelab.com.vkontaktetest.mvp.presenter.NewsFeedPresenter;
@@ -39,6 +40,7 @@ public interface ApplicationComponent {
     void inject(MainPresenter presenter);
     void inject(MembersPresenter presenter);
     void inject(BoardPresenter presenter);
+    void inject(InfoPresenter presenter);
 
     //manager
     void inject(NetworkManager manager);

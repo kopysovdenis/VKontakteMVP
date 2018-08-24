@@ -1,7 +1,6 @@
 package www.performancelab.com.vkontaktetest.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -21,22 +20,35 @@ import www.performancelab.com.vkontaktetest.model.view.BaseViewModel;
 import www.performancelab.com.vkontaktetest.mvp.presenter.BaseFeedPresenter;
 import www.performancelab.com.vkontaktetest.mvp.view.BaseFeedView;
 
-public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedView{
+public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedView {
 
     @BindView(R.id.rv_list)
     RecyclerView mRecyclerView;
-    BaseAdapter mAdapter;
 
-    @BindView(R.id.swipe_refresh)
-    protected SwipeRefreshLayout mSwipeRefreshLayout;
-    protected ProgressBar mProgressBar;
+    BaseAdapter mAdapter;
 
     protected BaseFeedPresenter mBaseFeedPresenter;
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
+    @BindView(R.id.swipe_refresh)
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
+
+    protected ProgressBar mProgressBar;
+
+    private boolean isWithEndlessList;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        isWithEndlessList = true;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
         setUpRecyclerView(view);
@@ -44,49 +56,51 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
         setUpSwipeToRefreshLayout(view);
 
         mBaseFeedPresenter = onCreateFeedPresenter();
+
         mBaseFeedPresenter.loadStart();
     }
+
 
     @Override
     protected int getMainContentLayout() {
         return R.layout.fragment_feed;
     }
 
-    private void setUpRecyclerView(View rootView){
+
+    private void setUpRecyclerView(View rootView) {
 
         MyLinearLayoutManager mLinearLayoutManager = new MyLinearLayoutManager(getActivity());
-
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (mLinearLayoutManager.isOnnextPagePosition()){
-                    mBaseFeedPresenter.loadNext(mAdapter.getRealItemCount());
+        if (isWithEndlessList) {
+            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    if (mLinearLayoutManager.isOnnextPagePosition()) {
+                        mBaseFeedPresenter.loadNext(mAdapter.getRealItemCount());
+                    }
                 }
-            }
-        });
+            });
+        }
 
         ((SimpleItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
     }
 
-    private void setUpAdapter(RecyclerView rv){
+    protected void setUpAdapter(RecyclerView rv) {
         mAdapter = new BaseAdapter();
         rv.setAdapter(mAdapter);
     }
 
-    public void setUpSwipeToRefreshLayout(View rootView){
+    private void setUpSwipeToRefreshLayout(View rootView) {
         mSwipeRefreshLayout.setOnRefreshListener(() -> onCreateFeedPresenter().loadRefresh());
+
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+
         mProgressBar = getBaseActivity().getProgresBar();
     }
 
-    @Override
-    public int onCreateToolBarTitle() {
-        return 0;
-    }
-
     protected abstract BaseFeedPresenter onCreateFeedPresenter();
+
 
     @Override
     public void showRefrasheng() {
@@ -96,6 +110,7 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
     public void hideRefrasheng() {
         mSwipeRefreshLayout.setRefreshing(false);
     }
+
 
     @Override
     public void showListProgress() {
@@ -107,10 +122,12 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
         mProgressBar.setVisibility(View.GONE);
     }
 
+
     @Override
     public void showError(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseActivity(), message, Toast.LENGTH_LONG).show();
     }
+
 
     @Override
     public void setItems(List<BaseViewModel> items) {
@@ -121,6 +138,9 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
     public void addItems(List<BaseViewModel> items) {
         mAdapter.addItems(items);
     }
+
+
+    public void setWithEndlessList(boolean withEndlessList) {
+        isWithEndlessList = withEndlessList;
+    }
 }
-
-
