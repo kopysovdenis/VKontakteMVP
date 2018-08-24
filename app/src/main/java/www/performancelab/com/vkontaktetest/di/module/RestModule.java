@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import www.performancelab.com.vkontaktetest.rest.RestClient;
+import www.performancelab.com.vkontaktetest.rest.api.BoardApi;
 import www.performancelab.com.vkontaktetest.rest.api.GroupsApi;
 import www.performancelab.com.vkontaktetest.rest.api.UsersApi;
 import www.performancelab.com.vkontaktetest.rest.api.WallApi;
@@ -40,5 +41,11 @@ public class RestModule {
     @Provides
     public GroupsApi provideGroupsApi(){
         return mRestClient.createService(GroupsApi.class);
+    }
+
+    @Provides
+    @Singleton
+    public BoardApi provideBoardApi() {
+        return mRestClient.createService(BoardApi.class);
     }
 }
